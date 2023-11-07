@@ -1,10 +1,13 @@
 let items;
-let maxGuesses = 10;
+let maxGuesses = 20;
 let craftingTables = [];
 let isTableValid = false;
 let cursor = document.getElementById("cursor");
 let cursorItem = null;
 let givenIngredients;
+let tagsFinder;
+let itemNames;
+let minetip;
 let ingredientSlots = {};
 let highContrastMode = false;
 
@@ -22,6 +25,7 @@ const greenGuess = "greenguess";
  * @param {String} item
  */
 function setSlotBackground(div, item) {
+  
   div.classList =
     item === null ? ["slot-item"] : ["slot-item "+item.split(":")[1]];
 }
@@ -92,10 +96,13 @@ function initIngredients() {
     let image = document.createElement("div");
 
     newSlot.classList.add("slot");
+    newSlot.classList.add("minetext");
     newSlot["item"] = ingredient;
     image.classList.add("slot-image");
 
+    image.setAttribute("data-mctitle", itemNames[ingredient.split(":")[1]]);
     newSlot.appendChild(image);
+    newSlot.setAttribute("data-mctitle", itemNames[ingredient.split(":")[1]]);
     setSlotBackground(image, ingredient);
     ingredientsList.appendChild(newSlot);
 
@@ -142,12 +149,16 @@ function addNewCraftingTable() {
   outputDiv.classList.add("crafting-output");
   let slot = document.createElement("div");
   slot.classList.add("slot");
+  addTooltip(slot);
+  
   let imageDiv = document.createElement("div");
   slot.setAttribute("id", "solutiondiv" + tableNum);
+  
   slot.classList.add("output-slot");
   imageDiv.classList.add("slot-image");
   slot.appendChild(imageDiv);
-
+  addTooltip(slot);
+  
   slot.addEventListener("mousedown", (e) => {
     if (!isTableValid) return;
 
@@ -219,17 +230,22 @@ function addNewCraftingTable() {
           const slot = document.querySelector(
             "#table"+tableNum+"slot"+(j-1)
           );
-
           if (rowElements[i] === 2) {
             slot.classList.add("greenguess");
           } else if (rowElements[i] === 3) {
             slot.classList.add("orangeguess");
           }
-
+          
           slot.classList.add("lockedslot");
           slot.classList.remove("slot");
+          
         }
       }
+      
+      const clearButton = document.querySelector(
+        "#clear-button-"+tableNum
+      );
+      clearButton.classList.add("locked");
       addNewCraftingTable();
       
       const guessbox = document.querySelector(
@@ -242,8 +258,20 @@ function addNewCraftingTable() {
     lockedtable.replaceWith(lockedtable.cloneNode(true));
     var solutiondiv = document.getElementById("solutiondiv" + tableNum);
     solutiondiv.classList.add("lockedslot");
+    
+    for (let x = 0; x < 9; x++) {
+      let slotID = "#table"+(tableNum)+"slot"+(x);
+      
+      const slot = document.querySelector(
+        slotID
+      );
+      
+      addTooltip(slot)
+    }
     solutiondiv.classList.remove("slot");
     solutiondiv.replaceWith(solutiondiv.cloneNode(true));
+    var solutiondiv1 = document.getElementById("solutiondiv" + tableNum);
+    addTooltip(solutiondiv1)
     if (guessCount >= maxGuesses) {
       setTimeout(() => {
         loser();
@@ -261,9 +289,12 @@ function addNewCraftingTable() {
     if (checkArrangementData[0]) {
       isTableValid = true;
       setSlotBackground(imageDiv, checkArrangementData[1]);
+      imageDiv.setAttribute("data-mctitle", itemNames[checkArrangementData[1].split(":")[1]]);
+      addTooltip(imageDiv);
     } else {
       isTableValid = false;
       setSlotBackground(imageDiv, null);
+      imageDiv.setAttribute("data-mctitle", "");
     }
   };
 
@@ -282,6 +313,7 @@ function addNewCraftingTable() {
       let imageSlotDiv = document.createElement("div");
       imageSlotDiv.classList.add("slot-image");
       slot.appendChild(imageSlotDiv);
+      addTooltip(slot);
 
       // Slot-specific helper functions
       const swap = () => {
@@ -290,12 +322,15 @@ function addNewCraftingTable() {
           cursorItem,
           craftingTables[tableNum][slot["row"]][slot["col"]],
         ];
+        imageSlotDiv.setAttribute("data-mctitle", itemNames[cursorItem.split(":")[1]]);
         setCursor(cursorItem);
       };
 
       const setSlotToCursor = () => {
         craftingTables[tableNum][slot["row"]][slot["col"]] = cursorItem;
         setSlotBackground(imageSlotDiv, cursorItem);
+        
+        imageSlotDiv.setAttribute("data-mctitle", itemNames[cursorItem.split(":")[1]]);
       };
 
       slot.addEventListener("mousedown", (e) => {
@@ -340,10 +375,47 @@ function addNewCraftingTable() {
         }
       });
     }
+    document.getElementById("minetip-tooltip").style.display = "none";
     tableDiv.appendChild(craftingTableRow);
+    
   }
 
+  let clearButtonContainer = document.createElement("div");
+
+  let clearButton = document.createElement("div");
+  clearButton.addEventListener("mouseup", (e) => {
+    if(e.target.classList.contains("locked")) return;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        
+        const slot = document.querySelector(
+          "#table"+tableNum+"slot"+(i*3+j)
+        ).children[0];
+        setSlotBackground(slot, null);
+      }
+    }
+      craftingTables[tableNum] = [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null],
+      ]
+      const finishedslot = document.querySelector(
+        "#solutiondiv"+tableNum+""
+      ).children[0];
+      setSlotBackground(finishedslot, null);
+      
+    triggerAudioButton("", "click");
+  } ); 
+  let clearButtonText = document.createElement("div");
+  clearButtonText.classList.add("title");
+  clearButtonText.textContent = "x";
+  clearButton.appendChild(clearButtonText);
+  clearButtonContainer.appendChild(clearButton);
+  tableDiv.appendChild(clearButtonContainer);
   newTable.appendChild(outputDiv);
+  clearButton.classList.add("clear-button");
+  clearButton.classList.add("mc-button");
+  clearButton.setAttribute("id","clear-button-"+tableNum);
   document.getElementById("guesses").appendChild(newTable);
 }
 
@@ -423,6 +495,7 @@ function createPopup(msg, summary, win) {
   document.getElementById("popup").style = "visibility: visible;";
   document.getElementById("popupOverlay").style = "visibility: visible;";
   setSlotBackground(document.getElementById("popupSlotImage"), solution_item);
+  document.getElementById("popupSlotImage").setAttribute("data-mctitle",itemNames[solution_item.split(":")[1]]);
   document.getElementById("popupContainer").style = "visibility: visible;";
 
   if (window.location.href.includes("random")) {
@@ -471,7 +544,8 @@ function winner() {
  */
 function loser() {
   let summary = generateSummary();
-  let loserMessage = "You lost!  The solution was " + solution_item + "\n";
+  let soln = solution_item.split(":")[1]
+  let loserMessage = "You lost!  The solution was " + itemNames[soln] + "\n";
   createPopup(loserMessage, summary, 0);
   addShowPopupButton();
   sendStats(0, guessCount);
@@ -529,17 +603,50 @@ document.addEventListener("DOMContentLoaded", () => {
   addNewCraftingTable();
   givenIngredients = JSON.parse(localStorage.getItem("givenIngredients"));
 
-  if (!givenIngredients) {
     fetch("static/data/given_ingredients.json")
       .then((response) => response.json())
       .then((obj) => {
-        givenIngredients = obj;
-        localStorage.setItem(
-          "givenIngredients",
-          JSON.stringify(givenIngredients)
-        );
+        if(!givenIngredients || !(JSON.stringify(obj) == JSON.stringify(givenIngredients)))
+        {
+          givenIngredients = obj;
+          localStorage.setItem(
+            "givenIngredients",
+            JSON.stringify(givenIngredients)
+          );
+          window.location.reload();
+        }
+
       });
-  }
+  itemNames = JSON.parse(localStorage.getItem("itemNames"));
+    fetch("static/data/item_names.json")
+      .then((response) => response.json())
+      .then((obj) => {
+        if(!itemNames || !(JSON.stringify(obj) == JSON.stringify(itemNames)))
+        {
+          itemNames = obj;
+          localStorage.setItem(
+            "itemNames",
+            JSON.stringify(itemNames)
+          );
+          window.location.reload();
+        }
+
+      });
+    tagsFinder = JSON.parse(localStorage.getItem("tagsFinder"));
+    fetch("static/data/tag_merged.json")
+      .then((response) => response.json())
+      .then((obj) => {
+        if(!itemNames || !(JSON.stringify(obj) == JSON.stringify(tagsFinder)))
+        {
+          tagsFinder = obj;
+          localStorage.setItem(
+            "tagsFinder",
+            JSON.stringify(tagsFinder)
+          );
+          window.location.reload();
+        }
+
+      });
   
   /*
   if (!items) {
@@ -555,6 +662,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initIngredients();
 
   getSolutionRecipe();
+  minetip = document.getElementById("minetip-tooltip");
+
+  // original code from https://codepen.io/devbobcorn/pen/wvzxxLv
+
+  eventListenerAdder()
+  minetip.style.display = "none";
 
   highContrastMode = getHighContrastMode();
   setCss();
@@ -576,3 +689,42 @@ document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.pageX - 5 + "px";
   cursor.style.top = e.pageY - 5 + "px";
 });
+
+var pos = function (o, x, y, event) {
+  var posX = 0, posY = 0;
+  var e = event || window.event;
+  if (e.pageX || e.pageY) {
+      posX = e.pageX;
+      posY = e.pageY;
+  } else if (e.clientX || e.clientY) {
+      posX = event.clientX + document.documentElement.scrollLeft + document.body.scrollLeft;
+      posY = event.clientY + document.documentElement.scrollTop + document.body.scrollTop;
+  }
+  o.style.position = "absolute";
+  o.style.top = (posY + y) + "px";
+  o.style.left = (posX + x) + "px";
+}
+function eventListenerAdder(){
+  
+  document.querySelectorAll(".slot").forEach(e=>addTooltip(e));
+
+}
+function addTooltip(element){
+  
+  element.addEventListener("mouseover", function(event) {
+    minetip.innerHTML = event.target.getAttribute("data-mctitle");
+    if(minetip.innerHTML != "")
+    minetip.style.display = "block";
+  })
+  
+  element.addEventListener("mouseout", function(event) {
+    minetip.style.display = "none";
+    })
+
+  element.addEventListener("mousemove", function (event) {
+    if (event.clientX > window.innerWidth - document.getElementById("minetip-tooltip").getBoundingClientRect().width - 64)
+    pos (minetip, -document.getElementById("minetip-tooltip").getBoundingClientRect().width, -30, event);
+    else
+    pos (minetip, 5, -30, event);
+  });
+}

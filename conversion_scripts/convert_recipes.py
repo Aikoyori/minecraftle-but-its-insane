@@ -13,11 +13,11 @@ from pprint import pprint
 
 # Converts tags to acceptable equivalent blocks
 tag_map = {
-    
+
 }
 
 files_to_skip = [
-    "stick_from_bamboo_item"
+    
 ]
 
 given_ingredients = json.load(open("../app/static/data/given_ingredients.json"))
@@ -40,6 +40,7 @@ def process_recipes(path):
             "type": "",
             "group": "",
             "output": "",
+            "count": 0,
             "input": []
         }
 
@@ -47,6 +48,7 @@ def process_recipes(path):
         new_recipe["group"] = jsonfile.get("group", "")
         
         new_recipe["output"] = jsonfile["result"]["item"]
+        new_recipe["count"] = jsonfile["result"]["count"] if "count" in list(jsonfile["result"].keys()) is not None else 1
         skip = False
         for row in jsonfile["pattern"]:
             new_row = []
@@ -61,18 +63,12 @@ def process_recipes(path):
                     
                     # Convert tags to blocks
                     if itemname is None:
-                        itemname = key_item.get("tag", None)
-                        for tag in tag_map.keys():
-                            if tag in itemname:
-                                itemname = tag_map[tag]
+                        itemname = "#"+key_item.get("tag", None)
+                        
 
-                    if itemname == "minecraft:oak_planks":
-                        itemname = "minecraft:planks"
                         
                     new_row.append(itemname)
 
-                    if itemname not in given_ingredients:
-                        skip = True
 
             new_recipe["input"].append(new_row)
         
@@ -84,7 +80,7 @@ def process_recipes(path):
 
 def create_recipes():
     processed_recipes = process_recipes("./recipes/")
-    outputfilename = "./recipes.json"
+    outputfilename = "./recipes-all.json"
     with open(outputfilename, "w") as write_file:
         json.dump(processed_recipes, write_file, indent = 4)
 

@@ -9,7 +9,7 @@ def main():
           "to remove ingredients type remove and then every ingredient name to remove them from the list\n", "for a list of recipe names type LOR\n",  "to REPEAT these instructions type help")
     
     recipenames = []
-    with open("app\static\data\items.json") as f:
+    with open("app/static/data/recipes.json") as f:
         jsonfile = json.load(f)
         for i in jsonfile:
             recipenames.append(i)

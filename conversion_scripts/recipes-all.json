@@ -9675,6 +9675,20 @@
             ]
         ]
     },
+    "stick": {
+        "type": "minecraft:crafting_shaped",
+        "group": "sticks",
+        "output": "minecraft:stick",
+        "count": 4,
+        "input": [
+            [
+                "#minecraft:planks"
+            ],
+            [
+                "#minecraft:planks"
+            ]
+        ]
+    },
     "sticky_piston": {
         "type": "minecraft:crafting_shaped",
         "group": "",
@@ -11179,20 +11193,6 @@
                 "minecraft:terracotta",
                 "minecraft:terracotta",
                 "minecraft:terracotta"
-            ]
-        ]
-    },
-    "stick": {
-        "type": "minecraft:crafting_shaped",
-        "group": "sticks",
-        "output": "minecraft:stick",
-        "count": 4,
-        "input": [
-            [
-                "#minecraft:planks"
-            ],
-            [
-                "#minecraft:planks"
             ]
         ]
     }

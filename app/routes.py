@@ -155,7 +155,7 @@ def submitstats():
 def pagenotfound(e):
     return render_template('404.html'), 404
 
-TIMEZONE = 'Australia/Perth' # set this to None to use machine timezone
+TIMEZONE = None # set this to None to use machine timezone
 
 with open("app/static/data/given_ingredients.json", "r") as f:
     given_ingredients = json.load(f)
@@ -177,11 +177,7 @@ for recipe_name in all_recipes_names:
             if item is not None:
                 items_in_recipe.add(item)
 
-    for item in items_in_recipe:
-        if item not in given_ingredients:
-            valid = False
-    if valid:
-        valid_recipe_names.append(recipe_name)
+    valid_recipe_names.append(recipe_name)
 
 with DbConn() as conn:
     conn.create_table()

@@ -58,8 +58,24 @@ function compareTables(table1, table2, matchOnly) {
           continue;
         }
       }
-
-      if (table1[i][j] === table2[i][j]) {
+      //console.log(table1)
+      //console.log(table2)
+      /*
+      if((tagsFinder[table1[i][j]] && tagsFinder[table1[i][j]].includes(table2[i][j])))
+      {
+        console.log("tag match 1 " + tagsFinder[table1[i][j]])
+        console.log(table1)
+      }
+      if((tagsFinder[table2[i][j]] && tagsFinder[table1[i][j]].includes(table1[i][j])))
+      {
+        console.log("tag match 2 " + tagsFinder[table2[i][j]])
+        console.log(table2)
+      }*/
+      if (table1[i][j] === table2[i][j] || 
+        (tagsFinder[table1[i][j]] && tagsFinder[table1[i][j]].includes(table2[i][j])) ||
+        (tagsFinder[table2[i][j]] && tagsFinder[table2[i][j]].includes(table1[i][j]))
+        
+        ) {
         if (table1[i][j] === null) {
           // if match is air
           matchmap[i][j] = 1;
@@ -129,6 +145,13 @@ function checkAllVariants(guess) {
   let matchmap = null;
 
   allVariants.forEach((variant, i) => {
+
+    matchData = compareTables(variant, guess);
+    // matchData[2] is boolean isFullMatch
+    if (matchData[2]) {
+      isCorrect = true;
+      matchmap = matchData[0];
+    }  
     matchData = compareTables(variant, guess);
     // matchData[2] is boolean isFullMatch
     if (matchData[2]) {
@@ -318,7 +341,9 @@ function checkArrangement(table) {
   for (let [key, value] of Object.entries(allRecipesAllVariants)) {
     for (let variant of value) {
       matchmapdata = compareTables(variant, table);
+      //console.log(matchmapdata[2])
       if (matchmapdata[2]) {
+        console.log(key);
         return [true, key];
       }
     }
