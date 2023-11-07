@@ -18,14 +18,17 @@
 :root {
   --inv-background: #c6c6c6;
   --slot-background: #8b8b8b;
+  --slot-locked-background: #474545;
   --slot-background-hover: #9f9f9f;
   --slot-shadow: rgba(55, 55, 55, 0.7);
   --slot-inset: #fefefe;
 
-  --button-text: #ddd;
+  --button-text: #fff;
   --button-text-shadow: #000a;
   --button-text-hover: #ffffa0;
   --button-text-hover-shadow: #202013cc;
+  --button-border: #000;
+  --button-hover-border: #fff;
   --button-background: #999;
   --button-background-hover: rgba(100, 100, 255, 0.45);
   --button-active-inset-dark: #0004;
@@ -106,25 +109,27 @@ a:visited {
   overflow: hidden;
   white-space: nowrap;
   user-select: none;
+  border:2px solid var(--button-border);
 
   color: var(--inv-background);
   text-decoration: none;
 
   background: var(--button-background) url("../images/button-background.png")
     center / cover;
+  background-repeat: repeat;
   image-rendering: pixelated;
-  border: 2px solid black;
 
   text-align: center;
 }
 
 /* Mouseover */
 .mc-button:hover .title {
-  background-color: var(--button-background-hover);
-  text-shadow: 2px 2px var(--button-text-hover-shadow);
-  color: var(--button-text-hover);
+  text-shadow: 0.155rem 0.155rem var(--button-text-shadow);
 }
-
+/* Mouseover */
+.mc-button:hover {
+  border:2px solid var(--button-hover-border);
+}
 .mc-button:active .title {
   box-shadow: inset -2px -4px var(--button-active-inset-dark),
     inset 2px 2px var(--button-active-text-inset-light);
@@ -135,17 +140,23 @@ a:visited {
   width: 100%;
   height: 100%;
   padding: 0.5rem 0;
-
+  font-size: 24px;
+  letter-spacing: 0.05rem;
+  
   color: var(--button-text);
-  text-shadow: 2px 2px var(--button-text-shadow);
+  text-shadow: 0.15rem 0.15rem var(--button-text-shadow);
   box-shadow: inset -2px -4px var(--button-text-inset-dark),
     inset 2px 2px var(--button-active-inset-light);
 }
 
 .guesses {
-  max-width: 22rem;
-  margin: auto;
-}
+  min-width: 22rem;
+  max-width: 46rem;
+  overflow-x: auto;
+  margin: auto auto 2rem auto;
+  display: flex;
+  gap: 2rem;
+} 
 
 .inv-background {
   background: var(--inv-background);
@@ -158,10 +169,12 @@ a:visited {
 }
 
 .slot {
-  width: 3rem;
-  height: 3rem;
+  width: 36px;
+  height: 36px;
   display: flex;
   justify-content: center;
+  align-items: center;
+  
   background-color: var(--slot-background);
   box-shadow: inset 2px 2px 0px var(--slot-shadow),
     inset -2px -2px 0px var(--slot-inset);
@@ -173,19 +186,20 @@ a:visited {
 }
 
 .lockedslot {
-  width: 3rem;
-  height: 3rem;
+  width: 36px;
+  height: 36px;
   display: flex;
   justify-content: center;
-  background-color: var(--slot-background);
+  align-items: center;
+  background-color: var(--slot-locked-background);
   box-shadow: inset 2px 2px 0px var(--slot-shadow),
     inset -2px -2px 0px var(--slot-inset);
 }
 
 .slot-image {
   margin: auto;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 100%;
+  height: 100%;
   image-rendering: pixelated;
   /* image-rendering: auto; */
   background-size: contain;
@@ -198,20 +212,30 @@ a:visited {
 }
 
 .crafting-table {
-  width: 9rem;
-  height: 9rem;
+  display: table;
+  margin: 0;
+}
+
+.crafting-table-row {
   display: flex;
-  flex-wrap: wrap;
 }
 
-.crafting-output {
-  margin: 3rem 0;
+.crafting-table-instance {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  justify-content: space-around;
 }
-
+.output-slot
+{
+  width: 48px;
+  height: 48px;
+}
 .arrow {
   color: var(--slot-background);
-  margin: auto;
+  margin: auto 0 auto 0;
   font-size: 3rem;
+  
 }
 
 .arrow p {
@@ -233,15 +257,17 @@ a:visited {
   position: absolute;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  height: 3rem;
-  width: 3rem;
   margin: auto;
   background-size: cover;
   image-rendering: pixelated;
+  width: 3rem;
+  height: 3rem;
 }
 
 #solution,
 #timezone {
+  display: grid;
+  
   opacity: 0;
   position: absolute;
   pointer-events: none;
@@ -318,18 +344,29 @@ td {
   white-space: pre;
   font-family: Minecraft-Regular;
   max-height: 30rem;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.popupOverlay {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 .close-popup {
   margin: 0.5rem auto;
   margin-bottom: 0;
-  max-width: 6rem;
+  max-width: 15rem;
 }
 
 .show-popup {
   margin: 0.5rem auto;
-  max-width: 10rem;
+  max-width: 15rem;
 }
 
 .loading-spinner {
@@ -348,4 +385,35 @@ td {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.logo
+{
+  max-width: 40rem;
+}
+/* modal overlay */
+
+/* scrollbar */
+
+*::-webkit-scrollbar {
+  height: 20px;
+  width: 20px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #000000;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c0c0c0 #000000;
+}
+*::-webkit-scrollbar-thumb
+{
+  background-color: #c0c0c0;
+  border-right: 4px solid #808080;
+  border-bottom: 4px solid #808080;
+}
+html{
+  
+  scroll-behavior: smooth;
 }

@@ -22,8 +22,8 @@ const greenGuess = "greenguess";
  * @param {String} item
  */
 function setSlotBackground(div, item) {
-  div.style.backgroundImage =
-    item === null ? "none" : "url(" + items[item]["icon"] + ")";
+  div.classList =
+    item === null ? ["slot-item"] : ["slot-item "+item.split(":")[1]];
 }
 
 var click = document.getElementById("audio");
@@ -118,6 +118,7 @@ function addNewCraftingTable() {
   let tableNum = craftingTables.length;
   newTable["tableNum"] = tableNum;
   newTable.classList.add("inv-background");
+  newTable.classList.add("crafting-table-instance");
   newTable.classList.add("flex");
 
   let tableDiv = document.createElement("div");
@@ -132,11 +133,9 @@ function addNewCraftingTable() {
 
   newTable.appendChild(tableDiv);
 
-  let arrowDiv = document.createElement("div");
+  let arrowDiv = document.createElement("img");
   arrowDiv.classList.add("arrow");
-  let arrow = document.createElement("p");
-  arrow.innerText = "→";
-  arrowDiv.appendChild(arrow);
+  arrowDiv.src = "/static/images/arrow.png";
   newTable.appendChild(arrowDiv);
 
   let outputDiv = document.createElement("div");
@@ -145,6 +144,7 @@ function addNewCraftingTable() {
   slot.classList.add("slot");
   let imageDiv = document.createElement("div");
   slot.setAttribute("id", "solutiondiv" + tableNum);
+  slot.classList.add("output-slot");
   imageDiv.classList.add("slot-image");
   slot.appendChild(imageDiv);
 
@@ -196,7 +196,7 @@ function addNewCraftingTable() {
             j = i + 1;
           }
           const slot = document.querySelector(
-            "#tablenumber" + tableNum + " :nth-child(" + j + ")"
+            "#table"+tableNum+"slot"+(j-1)
           );
           slot.classList.add("greenguess");
           slot.classList.add("lockedslot");
@@ -206,7 +206,7 @@ function addNewCraftingTable() {
       setTimeout(() => {
         winner();
       }, 750);
-    } else if (guessCount <= maxGuesses) {
+    } else if (guessCount < maxGuesses) {
       for (const [rowNum, rowElements] of matchmap.entries()) {
         for (let i = 0; i < 3; i++) {
           if (rowNum === 1) {
@@ -217,7 +217,7 @@ function addNewCraftingTable() {
             j = i + 1;
           }
           const slot = document.querySelector(
-            "#tablenumber" + tableNum + " :nth-child(" + j + ")"
+            "#table"+tableNum+"slot"+(j-1)
           );
 
           if (rowElements[i] === 2) {
@@ -231,6 +231,11 @@ function addNewCraftingTable() {
         }
       }
       addNewCraftingTable();
+      
+      const guessbox = document.querySelector(
+        "#guesses"
+      );
+      guessbox.scrollLeft = guessbox.scrollWidth;
     }
 
     var lockedtable = document.getElementById("tablenumber" + tableNum);
@@ -239,7 +244,7 @@ function addNewCraftingTable() {
     solutiondiv.classList.add("lockedslot");
     solutiondiv.classList.remove("slot");
     solutiondiv.replaceWith(solutiondiv.cloneNode(true));
-    if (guessCount > maxGuesses) {
+    if (guessCount >= maxGuesses) {
       setTimeout(() => {
         loser();
       }, 750);
@@ -263,73 +268,79 @@ function addNewCraftingTable() {
   };
 
   // Generate 9 slots
-  for (let i = 0; i < 9; i++) {
-    let slot = document.createElement("div");
-    slot.setAttribute("id", i);
-    slot.classList.add("slot");
-    slot["row"] = Math.floor(i / 3);
-    slot["col"] = i % 3;
-    tableDiv.appendChild(slot);
-    let imageSlotDiv = document.createElement("div");
-    imageSlotDiv.classList.add("slot-image");
-    slot.appendChild(imageSlotDiv);
+  for (let i = 0; i < 3; i++) {
+    let craftingTableRow = document.createElement("div");
+    craftingTableRow.classList.add("crafting-table-row");
+    for (let j = 0; j < 3; j++) {
+      let a = i * 3 + j;
+      let slot = document.createElement("div");
+      slot.setAttribute("id", "table"+tableNum+"slot"+a);
+      slot.classList.add("slot");
+      slot["row"] = i;
+      slot["col"] = j;
+      craftingTableRow.appendChild(slot);
+      let imageSlotDiv = document.createElement("div");
+      imageSlotDiv.classList.add("slot-image");
+      slot.appendChild(imageSlotDiv);
 
-    // Slot-specific helper functions
-    const swap = () => {
-      setSlotBackground(imageSlotDiv, cursorItem);
-      [craftingTables[tableNum][slot["row"]][slot["col"]], cursorItem] = [
-        cursorItem,
-        craftingTables[tableNum][slot["row"]][slot["col"]],
-      ];
-      setCursor(cursorItem);
-    };
+      // Slot-specific helper functions
+      const swap = () => {
+        setSlotBackground(imageSlotDiv, cursorItem);
+        [craftingTables[tableNum][slot["row"]][slot["col"]], cursorItem] = [
+          cursorItem,
+          craftingTables[tableNum][slot["row"]][slot["col"]],
+        ];
+        setCursor(cursorItem);
+      };
 
-    const setSlotToCursor = () => {
-      craftingTables[tableNum][slot["row"]][slot["col"]] = cursorItem;
-      setSlotBackground(imageSlotDiv, cursorItem);
-    };
+      const setSlotToCursor = () => {
+        craftingTables[tableNum][slot["row"]][slot["col"]] = cursorItem;
+        setSlotBackground(imageSlotDiv, cursorItem);
+      };
 
-    slot.addEventListener("mousedown", (e) => {
-      if (craftingTables[tableNum][slot["row"]][slot["col"]] !== null) {
-        swap();
-        checkSolution();
-        return;
-      }
-
-      if (cursorItem === null) return;
-
-      isDragging = true;
-
-      document.addEventListener(
-        "mouseup",
-        (e) => {
-          setSlotToCursor();
-
-          isDragging = false;
-          cursorItem = null;
-          setCursor(null);
+      slot.addEventListener("mousedown", (e) => {
+        if (craftingTables[tableNum][slot["row"]][slot["col"]] !== null) {
+          swap();
           checkSolution();
+          return;
+        }
 
-          // getElements returns items lazily but we are removing items during
-          // iteration, so force it to finish before we start by calling Array.from()
-          for (const s of Array.from(
-            newTable.getElementsByClassName("dragging")
-          )) {
-            s.classList.remove("dragging");
-          }
-        },
-        { once: true }
-      );
-    });
+        if (cursorItem === null) return;
 
-    slot.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
+        isDragging = true;
 
-      if (craftingTables[tableNum][slot["row"]][slot["col"]] === null) {
-        slot.classList.add("dragging");
-        setSlotToCursor();
-      }
-    });
+        document.addEventListener(
+          "mouseup",
+          (e) => {
+            setSlotToCursor();
+
+            isDragging = false;
+            cursorItem = null;
+            setCursor(null);
+            checkSolution();
+
+            // getElements returns items lazily but we are removing items during
+            // iteration, so force it to finish before we start by calling Array.from()
+            for (const s of Array.from(
+              newTable.getElementsByClassName("dragging")
+            )) {
+              s.classList.remove("dragging");
+            }
+          },
+          { once: true }
+        );
+      });
+
+      slot.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+
+        if (craftingTables[tableNum][slot["row"]][slot["col"]] === null) {
+          slot.classList.add("dragging");
+          setSlotToCursor();
+        }
+      });
+    }
+    tableDiv.appendChild(craftingTableRow);
   }
 
   newTable.appendChild(outputDiv);
@@ -410,6 +421,7 @@ const copyToClipboard = (str) => {
  */
 function createPopup(msg, summary, win) {
   document.getElementById("popup").style = "visibility: visible;";
+  document.getElementById("popupOverlay").style = "visibility: visible;";
   setSlotBackground(document.getElementById("popupSlotImage"), solution_item);
   document.getElementById("popupContainer").style = "visibility: visible;";
 
@@ -467,19 +479,22 @@ function loser() {
 
 function togglePopup() {
   let popup = document.getElementById("popup");
+  let popupOverlay = document.getElementById("popupOverlay");
   let popupContainer = document.getElementById("popupContainer");
   if (popup.style.visibility === "visible") {
     popupContainer.style.visibility = "hidden";
+    popupOverlay.style.visibility = "hidden";
     popup.style.visibility = "hidden";
   } else {
     popupContainer.style.visibility = "visible";
+    popupOverlay.style.visibility = "visible";
     popup.style.visibility = "visible";
   }
 }
 
 function addShowPopupButton() {
   let showPopup = document.createElement("div");
-  showPopup.classList.add("mc-button", "show-popup");
+  showPopup.classList.add("mc-button", "show-popup","widebutton");
   let buttonTitle = document.createElement("div");
   buttonTitle.classList.add("title", "center");
   buttonTitle.textContent = "Show Summary";
@@ -525,9 +540,8 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       });
   }
-
-  items = JSON.parse(localStorage.getItem("items"));
-
+  
+  /*
   if (!items) {
     fetch("static/data/items.json")
       .then((response) => response.json())
@@ -537,8 +551,8 @@ document.addEventListener("DOMContentLoaded", () => {
         initIngredients();
       });
   } else {
-    initIngredients();
-  }
+  }*/
+  initIngredients();
 
   getSolutionRecipe();
 

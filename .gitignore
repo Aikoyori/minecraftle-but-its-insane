@@ -6,3 +6,5 @@ minecraftle.db
 minecraftle.ini
 scripts/
 wsgi.py
+conversion_scripts/recipes
+conversion_scripts/tags

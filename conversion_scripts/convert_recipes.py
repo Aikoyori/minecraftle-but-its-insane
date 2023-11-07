@@ -13,12 +13,7 @@ from pprint import pprint
 
 # Converts tags to acceptable equivalent blocks
 tag_map = {
-    "planks": "minecraft:planks",
-    "wooden_slabs":"minecraft:oak_slab",
-    "logs":"minecraft:oak_log",
-    "stone":"minecraft:cobblestone",
-    "wool":"minecraft:white_wool",
-    "coals":"minecraft:coal",
+    
 }
 
 files_to_skip = [

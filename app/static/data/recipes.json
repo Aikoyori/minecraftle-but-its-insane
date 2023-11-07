@@ -404,13 +404,13 @@
         "output": "minecraft:bowl",
         "input": [
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null,
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
                 null,
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null
             ]
         ]
@@ -426,9 +426,9 @@
                 "minecraft:lime_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -490,8 +490,8 @@
         "output": "minecraft:oak_pressure_plate",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -539,19 +539,19 @@
         "output": "minecraft:oak_stairs",
         "input": [
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null,
                 null
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
                 null
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -650,9 +650,9 @@
                 "minecraft:brown_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -1192,9 +1192,9 @@
                 "minecraft:gray_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -1323,14 +1323,14 @@
         "output": "minecraft:oak_boat",
         "input": [
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null,
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -1425,10 +1425,10 @@
         "output": "minecraft:stick",
         "input": [
             [
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -1648,9 +1648,9 @@
                 "minecraft:light_gray_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -1731,9 +1731,9 @@
                 "minecraft:pink_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -1817,9 +1817,9 @@
         "output": "minecraft:bookshelf",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
                 "minecraft:book",
@@ -1827,9 +1827,9 @@
                 "minecraft:book"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -2497,12 +2497,12 @@
         "input": [
             [
                 "minecraft:stick",
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:stick"
             ],
             [
                 "minecraft:stick",
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:stick"
             ]
         ]
@@ -2552,19 +2552,19 @@
         "output": "minecraft:barrel",
         "input": [
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:oak_slab",
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null,
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:oak_slab",
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -3345,19 +3345,19 @@
         "output": "minecraft:chest",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null,
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -3550,9 +3550,9 @@
                 "minecraft:green_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -4108,12 +4108,12 @@
         "output": "minecraft:crafting_table",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -4128,9 +4128,9 @@
                 "minecraft:orange_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -4248,9 +4248,9 @@
                 "minecraft:light_blue_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -4532,12 +4532,12 @@
                 "minecraft:paper"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -4618,18 +4618,18 @@
         "output": "minecraft:shield",
         "input": [
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:iron_ingot",
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
                 null,
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null
             ]
         ]
@@ -4701,7 +4701,7 @@
         "output": "minecraft:wooden_shovel",
         "input": [
             [
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
                 "minecraft:stick"
@@ -4778,9 +4778,9 @@
         "output": "minecraft:piston",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
                 "minecraft:cobblestone",
@@ -5060,7 +5060,7 @@
                 "minecraft:stick"
             ],
             [
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -5305,8 +5305,8 @@
                 "minecraft:string"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -5394,19 +5394,19 @@
         "output": "minecraft:jukebox",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:diamond",
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -5760,9 +5760,9 @@
         "output": "minecraft:oak_slab",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -5777,9 +5777,9 @@
                 "minecraft:red_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -5996,9 +5996,9 @@
         "output": "minecraft:beehive",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
                 "minecraft:honeycomb",
@@ -6006,9 +6006,9 @@
                 "minecraft:honeycomb"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -6492,16 +6492,16 @@
         "output": "minecraft:oak_door",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -6657,14 +6657,14 @@
         "output": "minecraft:oak_fence",
         "input": [
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:stick",
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:stick",
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -6718,9 +6718,9 @@
                 "minecraft:yellow_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -6752,8 +6752,8 @@
         "output": "minecraft:wooden_hoe",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
                 null,
@@ -6803,12 +6803,12 @@
                 "minecraft:flint"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -6995,9 +6995,9 @@
                 "minecraft:stick"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 null,
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -7178,9 +7178,9 @@
                 "minecraft:cyan_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -7414,12 +7414,12 @@
                 "minecraft:iron_ingot"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -7725,9 +7725,9 @@
                 "minecraft:black_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -7781,9 +7781,9 @@
                 "minecraft:blue_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -7952,14 +7952,14 @@
         "output": "minecraft:oak_trapdoor",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -8148,14 +8148,14 @@
         "output": "minecraft:oak_sign",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
                 null,
@@ -8314,9 +8314,9 @@
                 "minecraft:magenta_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -8414,9 +8414,9 @@
                 "minecraft:purple_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -8563,9 +8563,9 @@
         "output": "minecraft:wooden_pickaxe",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
                 null,
@@ -8640,9 +8640,9 @@
                 "minecraft:white_wool"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -8752,10 +8752,10 @@
         "output": "minecraft:wooden_sword",
         "input": [
             [
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
                 "minecraft:stick"
@@ -9369,19 +9369,19 @@
         "output": "minecraft:note_block",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:redstone",
-                "minecraft:planks"
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ]
         ]
     },
@@ -9536,11 +9536,11 @@
         "output": "minecraft:wooden_axe",
         "input": [
             [
-                "minecraft:planks",
-                "minecraft:planks"
+                "minecraft:oak_planks",
+                "minecraft:oak_planks"
             ],
             [
-                "minecraft:planks",
+                "minecraft:oak_planks",
                 "minecraft:stick"
             ],
             [
