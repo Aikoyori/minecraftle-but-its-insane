@@ -250,13 +250,13 @@ function generateNextGuessStartingTable(guess, correctSlots) {
  * @param {Array} correctSlots
  */
 function addOrangeSlots(guess, correctSlots) {
-  n_items = {};
+  n_items = [];
   // first pass initiliases all item dict entries to 0
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if (guess[i][j] === null) {
-      } else if (n_items[guess[i][j]] === undefined) {
-        n_items[guess[i][j]] = 0;
+      if (3*i+j === null) {
+      } else if (n_items[3*i+j] === undefined) {
+        n_items[3*i+j] = 0;
       }
     }
   }
@@ -265,16 +265,16 @@ function addOrangeSlots(guess, correctSlots) {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       if (correctSlots[i][j] === 2) {
-        n_items[guess[i][j]]++;
+        n_items[3*i+j]++;
       }
     }
   }
 
   // finds how many of each item are left to be identified
-  n_unidentified_items = { ...solution_n_items };
-  Object.keys(solution_n_items).forEach((e, i) => {
-    if (n_unidentified_items[e] !== undefined) {
-      n_unidentified_items[e] = solution_n_items[e] - n_items[e];
+  n_unidentified_items = [ ...solution_n_items ];
+  (solution_n_items).forEach((e, i) => {
+    if (n_unidentified_items[i] !== undefined) {
+      n_unidentified_items[i] = solution_n_items[i] - n_items[i];
     }
   });
 
@@ -282,9 +282,9 @@ function addOrangeSlots(guess, correctSlots) {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       if (correctSlots[i][j] === 2) {
-      } else if (n_unidentified_items[guess[i][j]] > 0) {
+      } else if (n_unidentified_items[3*i+j] > 0) {
         correctSlots[i][j] = 3;
-        n_unidentified_items[guess[i][j]]--;
+        n_unidentified_items[3*i+j]--;
       }
     }
   }
@@ -339,12 +339,12 @@ function processGuess(guess) {
 
 function checkArrangement(table) {
   for (let [key, value] of Object.entries(allRecipesAllVariants)) {
-    for (let variant of value) {
+    for (let variant of value[1]) {
       matchmapdata = compareTables(variant, table);
       //console.log(matchmapdata[2])
       if (matchmapdata[2]) {
-        console.log(key);
-        return [true, key];
+        console.log(value[0]);
+        return [true, value[0]];
       }
     }
   }
@@ -366,9 +366,9 @@ function init(solution) {
   remainingVariants = remainingVariants.concat(allVariants);
 
   for (let [key, value] of Object.entries(recipes)) {
-    allRecipesAllVariants[value.output] = getVariantsWithReflections(
+    allRecipesAllVariants[key] = [value.output,getVariantsWithReflections(
       value.input
-    );
+    )];
   }
 }
 
@@ -379,7 +379,7 @@ function init(solution) {
     [null,"minecraft:stick"]
 ]
  */
-let solution_n_items = {};
+let solution_n_items = [];
 let remainingVariants = [];
 let allVariants = [];
 let guessCount = 0;
