@@ -28,7 +28,7 @@ function getSolutionRecipe() {
 function populateSolution(rawrecipe) {
   solution_recipe = rawrecipe.input;
   solution_item = rawrecipe.output;
-  init(solution_recipe);
+  init(rawrecipe);
 }
 
 /**
@@ -343,15 +343,16 @@ function checkArrangement(table) {
       matchmapdata = compareTables(variant, table);
       //console.log(matchmapdata[2])
       if (matchmapdata[2]) {
-        console.log(value[0]);
-        return [true, value[0]];
+        console.log(value[0]+" "+value[2]);
+        return [true, value[0],value[2]];
       }
     }
   }
-  return [false, null];
+  return [false, null, 0];
 }
 
-function init(solution) {
+function init(rawsoln) {
+  let solution = rawsoln.input;
   for (let i = 0; i < solution.length; i++) {
     for (let j = 0; j < solution[0].length; j++) {
       if (solution[i][j] === null) {
@@ -368,7 +369,7 @@ function init(solution) {
   for (let [key, value] of Object.entries(recipes)) {
     allRecipesAllVariants[key] = [value.output,getVariantsWithReflections(
       value.input
-    )];
+    ),value.count];
   }
 }
 

@@ -448,6 +448,23 @@ html{
   
   scroll-behavior: smooth;
 }
+.crafting-output
+{
+  position: relative;
+  display: flex;
+}
+.crafting-output-number
+{
+  color: var(--button-text);
+  position: absolute;
+  font-size: 20px;
+  text-shadow: 0.125em 0.125em 0 #3F3F3F;
+  bottom:0;
+  right:0;
+  user-select: none;
+  pointer-events: none;
+  text-align:right;
+}
 
 /* minetip https://codepen.io/devbobcorn/pen/wvzxxLv */
 

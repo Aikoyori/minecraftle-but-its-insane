@@ -149,7 +149,12 @@ function addNewCraftingTable() {
   outputDiv.classList.add("crafting-output");
   let slot = document.createElement("div");
   slot.classList.add("slot");
-  addTooltip(slot);
+
+  let outputNumber = document.createElement("div");
+  outputNumber.classList.add("crafting-output-number");
+  outputNumber.setAttribute("id","outputNum"+tableNum);
+  outputNumber.innerHTML = "";
+  outputDiv.appendChild(outputNumber);
   
   let imageDiv = document.createElement("div");
   slot.setAttribute("id", "solutiondiv" + tableNum);
@@ -290,6 +295,10 @@ function addNewCraftingTable() {
       isTableValid = true;
       setSlotBackground(imageDiv, checkArrangementData[1]);
       imageDiv.setAttribute("data-mctitle", itemNames[checkArrangementData[1].split(":")[1]]);
+      if(checkArrangementData[2]> 1)
+        document.querySelector("#outputNum"+tableNum).innerHTML = checkArrangementData[2];
+      else
+        document.querySelector("#outputNum"+tableNum).innerHTML = "";
       addTooltip(imageDiv);
     } else {
       isTableValid = false;
@@ -402,7 +411,10 @@ function addNewCraftingTable() {
       const finishedslot = document.querySelector(
         "#solutiondiv"+tableNum+""
       ).children[0];
-      setSlotBackground(finishedslot, null);
+      setSlotBackground(finishedslot, null); 
+      document.querySelector(
+        "#outputNum"+tableNum
+      ).innerHTML = "";
       
     triggerAudioButton("", "click");
   } ); 
